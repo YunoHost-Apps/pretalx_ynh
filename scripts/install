@@ -3,6 +3,9 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
+
+email=$(ynh_user_get_info --username=$admin --key=mail)
+
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
@@ -22,6 +25,16 @@ chmod -R o-rwx "$install_dir"
 chown -R $app:www-data "$install_dir"
 
 #=================================================
+# APP INITIAL CONFIGURATION
+#=================================================
+ynh_script_progression "Adding $app's configuration files..."
+
+ynh_config_add --template="pretalx.cfg" --destination="$install_dir/pretalx.cfg"
+
+chmod 600 "$install_dir/pretalx.cfg"
+chown "$app:$app" "$install_dir/pretalx.cfg"
+
+#=================================================
 # INSTALL PYTHON DEPENDENCIES
 #=================================================
 ynh_script_progression "Installing Python dependencies..."
@@ -32,18 +45,8 @@ pushd $install_dir
     ynh_hide_warnings $install_dir/venv/bin/pip install --upgrade-strategy eager --upgrade "pretalx[postgres]"
     ynh_hide_warnings $install_dir/venv/bin/python3 -m pretalx migrate
     ynh_hide_warnings $install_dir/venv/bin/python3 -m pretalx rebuild
-    #ynh_hide_warnings $install_dir/venv/bin/python3 -m pretalx init
+    #ynh_hide_warnings ynh_exec_as_app $install_dir/venv/bin/python3 -m pretalx init --noinput DJANGO_SUPERUSER_EMAIL=$email DJANGO_SUPERUSER_PASSWORD=$password
 popd
-
-#=================================================
-# APP INITIAL CONFIGURATION
-#=================================================
-ynh_script_progression "Adding $app's configuration files..."
-
-ynh_config_add --template="pretalx.cfg" --destination="$install_dir/pretalx.cfg"
-
-chmod 600 "$install_dir/pretalx.cfg"
-chown "$app:$app" "$install_dir/pretalx.cfg"
 
 #=================================================
 # SYSTEM CONFIGURATION
