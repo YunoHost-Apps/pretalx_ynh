@@ -7,7 +7,7 @@ name = "Pretalx"
 description.en = "Conference management software"
 description.fr = "Logiciel de gestion de conférence"
 
-version = "2024.3.1~ynh1"
+version = "2025.1.0~ynh1"
 
 maintainers = ["eric_G"]
 
@@ -53,8 +53,8 @@ ram.runtime = "50M"
 [resources]
 
     [resources.sources.main]
-    url = "https://github.com/pretalx/pretalx/releases/download/v2024.3.1/pretalx-2024.3.1-py3-none-any.whl"
-    sha256 = "2d5d259fbb5ff2c280a2ee653b285e04aaa1ab17a951c4f78a8c28cc88dbdddd"
+    url = "https://github.com/pretalx/pretalx/archive/refs/tags/v2025.1.0.tar.gz"
+    sha256 = "2759a9bd781b1091c95072591e9a67742fccfac1cfe38315137bf6a9d0e7970c"
 
     autoupdate.strategy = "latest_github_tag"
     
