@@ -61,15 +61,15 @@ chown -R "$app:www-data" "/var/log/$app"
 ynh_script_progression "Installing Python dependencies..."
 
 pushd $install_dir
-      ynh_exec_as_app python3 -m venv $install_dir/venv
+      python3 -m venv $install_dir/venv
       source "$install_dir/venv/bin/activate"
-      ynh_hide_warnings ynh_exec_as_app $install_dir/venv/bin/pip install --upgrade pip setuptools wheel gunicorn django-redis
-      ynh_hide_warnings ynh_exec_as_app $install_dir/venv/bin/pip install --upgrade-strategy eager --upgrade "pretalx[postgres,redis]"
+      ynh_hide_warnings $install_dir/venv/bin/pip install --upgrade pip setuptools wheel gunicorn django-redis
+      ynh_hide_warnings $install_dir/venv/bin/pip install --upgrade-strategy eager --upgrade "pretalx[postgres,redis]"
       export PATH="$PATH:$nodejs_dir" 
       ynh_hide_warnings ynh_exec_as_app $install_dir/venv/bin/python3 -m pretalx migrate
       chown -R $app:www-data "$install_dir" 
-      ynh_hide_warnings ynh_exec_as_app $install_dir/venv/bin/python3 -m pretalx rebuild
-      ynh_hide_warnings ynh_exec_as_app PRETALX_INIT_ORGANISER_NAME="$organiser_name" PRETALX_INIT_ORGANISER_SLUG="$organiser_slug" DJANGO_SUPERUSER_EMAIL="$email" DJANGO_SUPERUSER_PASSWORD="$password" $install_dir/venv/bin/python3 -m pretalx init --noinput
+      ynh_hide_warnings $install_dir/venv/bin/python3 -m pretalx rebuild
+      PRETALX_INIT_ORGANISER_NAME="$organiser_name" PRETALX_INIT_ORGANISER_SLUG="$organiser_slug" DJANGO_SUPERUSER_EMAIL="$email" DJANGO_SUPERUSER_PASSWORD="$password" $install_dir/venv/bin/python3 -m pretalx init --noinput
       chown -R $app:www-data "$install_dir"
       deactivate
 popd
