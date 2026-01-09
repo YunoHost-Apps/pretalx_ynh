@@ -4,8 +4,6 @@
 # COMMON VARIABLES AND CUSTOM HELPERS
 #=================================================
 
-nodejs_version=22
-
 ############################################
 # Function to lock a Redis database by setting a dummy key
 ############################################

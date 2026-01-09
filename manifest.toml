@@ -19,7 +19,7 @@ admindoc = "https://docs.pretalx.org/"
 code = "https://github.com/pretalx/pretalx"
 
 [integration]
-yunohost = ">= 11.2.30"
+yunohost = ">= 12.1.30"
 helpers_version = "2.1"
 architectures = "all"
 multi_instance = true
@@ -77,3 +77,6 @@ ram.runtime = "50M"
 
     [resources.database]
     type = "postgresql"
+
+    [resources.nodejs]
+    version = "22"
