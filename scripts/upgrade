@@ -16,13 +16,6 @@ ynh_systemctl --service="${app}-web" --action="stop" --log_path="systemd"
 ynh_systemctl --service="${app}-worker" --action="stop" --log_path="systemd"
 
 #=================================================
-# UPGRADE DEPENDENCIES
-#=================================================
-ynh_script_progression "Upgrading dependencies..."
-
-ynh_nodejs_install
-
-#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression "Setting up source files..."
