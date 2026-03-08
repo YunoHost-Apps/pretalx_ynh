@@ -7,7 +7,7 @@ name = "Pretalx"
 description.en = "Conference management software"
 description.fr = "Logiciel de gestion de conférence"
 
-version = "2025.2.2~ynh3"
+version = "2025.2.2~ynh4"
 
 maintainers = ["eric_G"]
 
