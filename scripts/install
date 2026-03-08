@@ -63,7 +63,7 @@ pushd $install_dir
       chown -R $app:www-data "$install_dir" 
       ynh_hide_warnings $install_dir/venv/bin/python3 -m pretalx rebuild
       # temporary fix
-      ynh_replace --match="orga:organiser.teams.view" --replace="orga:organiser.teams.update" --file=$install_dir/venv/lib/python3.11/site-packages/pretalx/common/management/commands/init.py
+      ynh_replace --match="orga:organiser.teams.view" --replace="orga:organiser.teams.update" --file=$install_dir/venv/lib/$pypath/site-packages/pretalx/common/management/commands/init.py
       PRETALX_INIT_ORGANISER_NAME="$organiser_name" PRETALX_INIT_ORGANISER_SLUG="$organiser_slug" DJANGO_SUPERUSER_EMAIL="$email" DJANGO_SUPERUSER_USERNAME="$admin" DJANGO_SUPERUSER_PASSWORD="$password" $install_dir/venv/bin/python3 -m pretalx init --noinput
       chown -R $app:www-data "$install_dir"
       deactivate
